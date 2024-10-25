@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="flex justify-between items-center p-4 bg-gray-800">
+        <div class="flex items-center">
+            <div>
+                <h1 class="text-xl font-bold text-blue-400">Let's predict</h1>
+                <p class="text-sm text-gray-400">Let's make the world a better place</p>
+            </div>
+        </div>
+        <nav class="flex items-center space-x-4">
+            <a class="text-white hover:text-blue-400" href="#home">Home</a>
+            <a class="text-white hover:text-blue-400" href="#about">About</a>
+            <a class="text-white hover:text-blue-400" href="#predict">Predict</a>
+            <button class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white">Attrition</button>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <main id="home" class="flex items-center justify-start h-screen bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='img111p.jpg') }}');">
+        <div class="text-left ml-20">
+            <h2 class="text-7xl font-bold">Welcome to</h2>
+            <h2 class="text-7xl font-bold">Employee Attrition</h2>
+            <h2 class="text-7xl font-bold">Prediction</h2>
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section id="about" class="flex flex-col md:flex-row items-center justify-center h-screen bg-gray-700">
+        <div class="md:w-1/2 p-20">
+            <img src="{{ url_for('static', filename='img2p.jpg') }}" alt="About Us" class="rounded-lg shadow-lg w-full h-auto max-w-xl">
+        </div>
+        <div class="md:w-1/2 text-center md:text-left p-10">
+            <h1 class="text-5xl font-bold mb-4">About Us</h1>
+             <p class="mb-4 text-lg text-gray-300">At AttritionPredictor, we focus exclusively on predicting employee attrition using advanced machine learning models. Our goal is to provide organizations with accurate insights into turnover risks by training robust predictive models on employee data. By leveraging these models, HR professionals can make informed decisions to enhance retention strategies and create a more stable workforce.</p>
+            <p class="mb-4 text-lg text-gray-300">Our team combines expertise in data science and human resources to develop models that identify key factors influencing attrition. By analyzing historical employee data and behavior patterns, we equip organizations with actionable insights that help them understand potential turnover triggers. With AttritionPredictor, businesses can proactively address retention challenges, improve employee satisfaction, and ultimately foster a more engaged and committed workforce.</p>
+            <div class="flex justify-center mt-10">
+                <button class="border border-blue-500 text-blue- 500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prediction Section -->
+    <section id="predict" class="flex flex-col items-center justify-center bg-gray-800 py-20">
+        <h1 class="text-5xl font-bold text-white mb-10">Predict Employee Attrition</h1>
+        <form id="predictionForm" action="/predict" method="POST" class="w-full max-w-[90%] bg-gray-700 p-8 rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label for="age" class=" text-gray-300 text-lg">Age:</label>
+                    <input type="number" id="age" name="Age" placeholder="Enter Age" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <!-- Other input fields -->
+                <div class="form-group">
+                    <label for="gender" class="text-gray-300 text-lg">Gender:</label>
+                    <select id="gender" name="Gender" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="job_role" class="text-gray-300 text-lg">Job Role:</label>
+                    <select id="job_role" name="Job Role" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Job Role</option>
+                        <option value="Sales Executive">Sales Executive</option>
+                        <option value="Research Scientist">Research Scientist</option>
+                        <option value="Laboratory Technician">Laboratory Technician</option>
+                        <option value="Manufacturing Director">Manufacturing Director</option>
+                        <option value="Healthcare Representative">Healthcare Representative</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Sales Representative">Sales Representative</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Research Director">Research Director</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="department" class="text-gray-300 text-lg">Department:</label>
+                    <select id="department" name="Department" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Department</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Research & Development">Research & Development</option>
+                        <option value="Human Resources">Human Resources</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="overtime" class="text-gray-300 text-lg">Overtime:</label>
+                    <select id="overtime" name="Over Time" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Overtime</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="marital_status" class="text-gray-300 text-lg">Marital Status:</label>
+                    <select id="marital_status" name="Marital Status" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="business_travel" class="text-gray-300 text-lg">Business Travel:</label>
+                    <select id="business_travel" name="Business Travel" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Business Travel</option>
+                        <option value="Travel_Rarely">Travel Rarely</option>
+                        <option value="Travel_Frequently">Travel Frequently</option>
+                        <option value="Non-Travel">Non-Travel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="education" class="text-gray-300 text-lg">Education:</label>
+                    <select id="education" name="Education" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Education Level</option>
+                        <option value="1">High School</option>
+                        <option value="2">Bachelor’s Degree</option>
+                        <option value="3">Master’s Degree</option>
+                        <option value="4">Doctorate</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="monthly_income" class="text-gray-300 text-lg">Monthly Income:</label>
+                    <input type="number" id="monthly_income" name="Monthly Income" placeholder="Enter Monthly Income" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="distance_from_home" class="text-gray-300 text-lg">Distance From Home (in miles):</label>
+                    <input type="number" id="distance_from_home" name="Distance From Home" placeholder="Enter Distance" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="total_working_years" class="text-gray-300 text-lg">Total Working Years:</label>
+                    <input type="number" id="total_working_years" name="Total Working Years" placeholder="Enter Total Working Years" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="years_at_company" class="text-gray-300 text-lg">Years At Company:</label>
+                    <input type="number" id="years_at_company" name="Years At Company" placeholder="Enter Years At Company" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="education_field" class="text-gray-300 text-lg">Education Field:</label>
+                    <select id="education_field" name="Education Field" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Education Field</option>
+                        <option value="Life Sciences">Life Sciences</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Technical Degree">Technical Degree</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="training_times_last_year" class="text-gray-300 text-lg">Training Times Last Year:</label>
+                    <input type="number" id="training_times_last_year" name="Training Times Last Year" placeholder="Enter Training Times" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="environment_satisfaction" class="text-gray-300 text-lg">Environment Satisfaction:</label>
+                    <select id="environment_satisfaction" name="Environment Satisfaction" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Environment Satisfaction</option>
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4 (High)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="years_in_current_role" class="text-gray-300 text-lg">Years in Current Role:</label>
+                    <input type="number" id="years_in_current_role" name="Years In Current Role" placeholder="Enter Years in Current Role" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="job_satisfaction" class="text-gray-300 text-lg">Job Satisfaction:</label>
+                    <select id="job_satisfaction" name="Job Satisfaction" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Job Satisfaction</option>
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4 (High)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="relationship_satisfaction" class="text-gray-300 text-lg">Relationship Satisfaction:</label>
+                    <select id="relationship_satisfaction" name="Relationship Satisfaction" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Relationship Satisfaction</option>
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4 (High)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="work_life_balance" class="text-gray-300 text-lg">Work-Life Balance:</label>
+                    <select id="work_life_balance" name="Work Life Balance" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                        <option value="">Select Work-Life Balance</option>
+                        <option value="1">1 (Bad)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4 (Good)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="years_with_current_manager" class="text-gray-300 text-lg">Years With Current Manager:</label>
+                    <input type="number" id="years_with_current_manager" name="Years With Current Manager" placeholder="Enter Years" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="num_companies_worked" class="text-gray-300 text-lg">Number of Companies Worked:</label>
+                    <input type="number" id="num_companies_worked" name="Num Companies Worked" placeholder="Enter Number" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+                <div class="form-group">
+                    <label for="percent_salary_hike" class="text-gray-300 text-lg">Percent Salary Hike:</label>
+                    <input type="number" id="percent_salary_hike" name="Percent Salary Hike" placeholder="Enter Percent Salary Hike" required class="input-field bg-gray-600 text-white placeholder-gray-400">
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                Predict Attrition
+            </button>
+        </form>
+
+        <!-- Result Section -->
+        <div id="resultSection" class="hidden mt-10 bg-gray-700 p-6 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-white">Prediction Result :: Is there Attrition happens??</h2>
+            <p id="resultText" class="text-gray-300"></p>
+        </div>
+    </section>
+
+    <!-- Power BI Dashboard Section -->
+    <section id="dashboard" class="flex flex-col items-center justify-center bg-gray-800 py-20">
+            <h1 class="text-5xl font-bold text-white mb-10">Employee Attrition Dashboard</h1>
+            <img src="/static/HR Analytics dashboard.jpg" alt="QR Code for Employee Attrition Dashboard" class="w-full max-w-md" />
+            <p class="text-gray-300 mt-4">Scan the QR code to access the Employee Attrition Dashboard.</p>
+    </section>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this);
+            const data = new URLSearchParams(formData);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultSection = document.getElementById('resultSection');
+                const resultText = document.getElementById('resultText');
+
+                if (data.error) {
+                    resultText.textContent = `Error: ${data.error}`;
+                } else {
+                    resultText.textContent = `Prediction: ${data.prediction}`;
+                }
+
+                resultSection.classList.remove('hidden'); // Show the result section
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
