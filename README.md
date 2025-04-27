@@ -90,4 +90,8 @@ Employee attrition impacts organizational productivity and morale. By analyzing 
 
 
 ## 9) ScreenShots 
-
+- ![Image](https://github.com/user-attachments/assets/8d201054-3c88-434d-b5a6-99c1855ed20a)
+![Image](https://github.com/user-attachments/assets/7dba3774-e15c-4d2f-958a-49cdb974564b)
+![Image](https://github.com/user-attachments/assets/b27ab6ac-237a-480b-8976-993227e5da46)
+![Image](https://github.com/user-attachments/assets/95c5cfff-4a3a-442a-b6dd-c407230463df)
+![Image](https://github.com/user-attachments/assets/ed902324-c8ef-4bb4-b4e7-17ae5b7c8963)
